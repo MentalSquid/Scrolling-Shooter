@@ -16,7 +16,7 @@ class Renderer {
         mPaint = new Paint();
     }
 
-    void draw(GameState gs, HUD hud) {
+    void draw(GameState gs, HUD hud, ParticleSystem particleSystem) {
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
             mCanvas.drawColor(Color.argb(255, 0, 0, 0));
@@ -26,6 +26,9 @@ class Renderer {
             }
             if (gs.getGameOver()) {
                 //draw background
+            }
+            if (particleSystem.mIsRunning){
+                particleSystem.draw(mCanvas, mPaint);
             }
             //draw particle system
             hud.draw(mCanvas, mPaint, gs);
